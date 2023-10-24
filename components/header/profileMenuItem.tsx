@@ -3,27 +3,16 @@ import React, { useEffect, useRef, useState } from "react";
 import { CgProfile } from "react-icons/cg";
 import { BsChevronRight } from "react-icons/bs";
 import { TbMessages } from "react-icons/tb";
+import useClickOutside from "@/lib/hooks/useClickOutside";
 
 export default function ProfileMenuItem() {
   const [isOpen, setOpen] = useState(false);
 
   const absoluteDivRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    function handleOutsideClick(event: MouseEvent) {
-      if (absoluteDivRef.current && !absoluteDivRef.current.contains(event.target as HTMLDivElement)) {
-        setOpen(false);
-      }
-    }
-
-    if (isOpen) {
-      document.addEventListener("click", handleOutsideClick);
-    }
-
-    return () => {
-      document.removeEventListener("click", handleOutsideClick);
-    };
-  }, [isOpen]);
+  useClickOutside(absoluteDivRef, isOpen, () => {
+    setOpen(false);
+  });
 
   return (
     <div className="relative">
