@@ -6,7 +6,7 @@ export default function Search() {
       <BsSearch className="text-sm mx-2 text-gray-500" />
       <input
         type="text"
-        className=" outline-none py-2 font-light text-[0.8rem]"
+        className=" outline-none py-2 font-light w-[8rem] lg:w-[25rem] text-[0.8rem]"
         placeholder="Search Quora"
       />
     </div>
