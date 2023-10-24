@@ -6,22 +6,22 @@ import { FaPeopleGroup } from 'react-icons/fa6'
 import { GrNotification } from 'react-icons/gr'
 
 export const menuItems = [{
-    name: "home",
+    route: "/",
     icon: React.createElement(AiFillHome)
 },
 {
-    name: "following",
+    route: "/following",
     icon: React.createElement(CgFeed)
 },
 {
-    name: "Answer",
+    route: "/answer",
     icon: React.createElement(IoCreateOutline)
 },
 {
-    name: "Spaces",
+    route: "/spaces",
     icon: React.createElement(FaPeopleGroup)
 },
 {
-    name: "Notifications",
+    route: "/notifications",
     icon: React.createElement(GrNotification)
 },]
