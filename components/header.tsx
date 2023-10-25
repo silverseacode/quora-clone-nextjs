@@ -7,6 +7,7 @@ import { TfiWorld } from "react-icons/tfi";
 import AddQuestionButtonHeader from "./header/addQuestionButtonHeader";
 import { usePathname } from "next/navigation";
 import { BsSearch } from "react-icons/bs";
+import { AiOutlinePlusCircle } from "react-icons/ai";
 
 export default function Header() {
   const pathname = usePathname();
@@ -42,7 +43,11 @@ export default function Header() {
           </ul>
         </nav>
         <div className="flex flex-col relative">
-          <div className={`${isOpenSearch ? "w-[18rem]" : "w-[10rem]"} flex flex-row border border-gray-100 items-center`}>
+          <div
+            className={`${
+              isOpenSearch ? "w-[18rem]" : "w-[10rem]"
+            } flex flex-row border border-gray-100 items-center`}
+          >
             <BsSearch className="text-sm mx-2 text-gray-500" />
             <input
               type="text"
@@ -57,13 +62,17 @@ export default function Header() {
           </div>
           {isOpenSearch && searchTerm.length > 0 && (
             <div
-              className={`w-[18rem] bg-white h-[20rem] absolute z-20 top-10 rounded-md `}
+              className={`w-[18rem] bg-white h-auto absolute z-20 top-10 rounded-md `}
             >
-              <div className="flex flex-row items-center p-3 border-b">
-                <BsSearch className="text-xl mx-2 text-gray-500" />
-                <span className="text-gray-600">
-                  Search: <span className="font-bold">{searchTerm}</span>
-                </span>
+              <div className="flex flex-row  items-center py-3 px-1 ml-2 border-b">
+                <BsSearch className="text-xl mr-3 text-gray-500" />
+                <div className="text-gray-600 max-w-xs">
+                  Search: <div className="overflow-hidden break-words w-[14rem] font-bold">{searchTerm}</div>
+                </div>
+              </div>
+              <div className="flex flex-row py-3 px-1 ml-2">
+                <AiOutlinePlusCircle className="text-2xl mr-3  text-blue-500" />
+                <span className=" text-blue-500">Add New Question</span>
               </div>
             </div>
           )}
