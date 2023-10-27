@@ -8,11 +8,14 @@ import AddQuestionButtonHeader from "./header/addQuestionButtonHeader";
 import { usePathname } from "next/navigation";
 import { BsSearch } from "react-icons/bs";
 import { AiOutlinePlusCircle } from "react-icons/ai";
+import Modal from "./globals/modal";
 
 export default function Header() {
   const pathname = usePathname();
   const [isOpenSearch, setOpenSearch] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const handleChangeSearchTerm = (term: string) => {
     setSearchTerm(term);
@@ -46,7 +49,7 @@ export default function Header() {
           <div
             className={`${
               isOpenSearch ? "w-[18rem]" : "w-[10rem]"
-            } flex flex-row border border-gray-100 items-center`}
+            } lg:w-[25rem] flex flex-row border border-gray-100 items-center`}
           >
             <BsSearch className="text-sm mx-2 text-gray-500" />
             <input
@@ -55,7 +58,7 @@ export default function Header() {
               onClick={() => setOpenSearch(true)}
               onChange={(e) => handleChangeSearchTerm(e.target.value)}
               className={`${
-                isOpenSearch ? "w-[18rem]" : "w-[10rem]"
+                isOpenSearch ? "w-[18rem]" : "w-[8rem]"
               } outline-none py-2 font-light  lg:w-[25rem] text-[0.8rem]`}
               placeholder="Search Quora"
             />
@@ -67,7 +70,10 @@ export default function Header() {
               <div className="flex flex-row  items-center py-3 px-1 ml-2 border-b">
                 <BsSearch className="text-xl mr-3 text-gray-500" />
                 <div className="text-gray-600 max-w-xs">
-                  Search: <div className="overflow-hidden break-words w-[14rem] font-bold">{searchTerm}</div>
+                  Search:{" "}
+                  <div className="overflow-hidden break-words w-[14rem] font-bold">
+                    {searchTerm}
+                  </div>
                 </div>
               </div>
               <div className="flex flex-row py-3 px-1 ml-2">
@@ -85,7 +91,7 @@ export default function Header() {
             </div>
           </>
         )}
-        <AddQuestionButtonHeader />
+        <AddQuestionButtonHeader setModalOpen={setModalOpen} />
       </div>
       {isOpenSearch && (
         <div
@@ -93,6 +99,7 @@ export default function Header() {
           className="bg-black opacity-75 h-full w-full z-10"
         ></div>
       )}
+      {isModalOpen && <Modal setModalOpen={setModalOpen} />}
     </>
   );
 }
