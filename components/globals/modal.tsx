@@ -11,8 +11,8 @@ export default function Modal({ setModalOpen }: IProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   function adjustTextareaHeight(textarea: any) {
-    textarea.style.height = "auto"; 
-    textarea.style.height = textarea.scrollHeight + "px"; 
+    textarea.style.height = "auto";
+    textarea.style.height = textarea.scrollHeight + "px";
   }
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export default function Modal({ setModalOpen }: IProps) {
           onClick={(e) => {
             e.stopPropagation();
           }}
-          className="bg-white w-[45rem] h-[35rem] rounded-lg"
+          className="bg-white w-[45rem] h-[35rem] rounded-lg relative"
         >
           <div className="p-3">
             <AiOutlineClose className="text-2xl text-gray-800 " />
@@ -58,41 +58,62 @@ export default function Modal({ setModalOpen }: IProps) {
               <span className="font-medium text-sm">Create Post</span>
             </div>
           </div>
-          <div className="flex flex-col bg-blue-100 m-5 p-3 rounded-md">
-            <p className="text-blue-600 font-medium">
-              Tips on getting good answers quickly
-            </p>
-            <ul className="list-disc list-inside">
-              <li className="text-blue-600">
-                Make sure your question has not been asked already
-              </li>
-              <li className="text-blue-600">
-                Keep your question short and to the point
-              </li>
-              <li className="text-blue-600">
-                Double-check grammar and spelling
-              </li>
-            </ul>
-          </div>
-          <div className="w-full px-5">
-            <textarea
-            ref={textareaRef}
-              className="resize-none break-words w-full overflow-hidden  appearance-none text-black focus:outline-none  h-auto border-b text-lg placeholder-gray-500 font-medium"
-              value={questionValue}
-              placeholder='Start your question with "What", "How" "Why", etc.'
-              onChange={(e) => {
-                let newQuestion = e.target.value;
 
-                if (!newQuestion.endsWith('?')) {
-                    newQuestion += '?';
-                  }
+          {tabActive === "question" && (
+            <>
+              <div className="flex flex-col bg-blue-100 m-5 p-3 rounded-md">
+                <p className="text-blue-600 font-medium">
+                  Tips on getting good answers quickly
+                </p>
+                <ul className="list-disc list-inside">
+                  <li className="text-blue-600">
+                    Make sure your question has not been asked already
+                  </li>
+                  <li className="text-blue-600">
+                    Keep your question short and to the point
+                  </li>
+                  <li className="text-blue-600">
+                    Double-check grammar and spelling
+                  </li>
+                </ul>
+              </div>
+              <div className="w-full px-5">
+                <textarea
+                  ref={textareaRef}
+                  className="resize-none break-words w-full overflow-hidden  appearance-none text-black focus:outline-none  h-auto border-b text-lg placeholder-gray-500 font-medium"
+                  value={questionValue}
+                  placeholder='Start your question with "What", "How" "Why", etc.'
+                  onChange={(e) => {
+                    let newQuestion = e.target.value;
 
-                setQuestionValue(newQuestion);
-                adjustTextareaHeight(e.target);
-              }}
-              rows={1}
-            />
-          </div>
+                    if (!newQuestion.endsWith("?")) {
+                      newQuestion += "?";
+                    }
+
+                    setQuestionValue(newQuestion);
+                    adjustTextareaHeight(e.target);
+                  }}
+                  rows={1}
+                />
+              </div>
+              <div className="p-3 absolute border-t bottom-0 w-full flex flex-row items-center justify-end">
+                <button className="font-medium text-sm">Cancel</button>
+                <button
+                  disabled={questionValue.length === 0}
+                  className="disabled:opacity-50 bg-blue-600 text-white py-2 px-4 rounded-full ml-3 text-sm"
+                >
+                  Add question
+                </button>
+              </div>
+            </>
+          )}
+
+          {tabActive === "post" && 
+          
+          <>
+          
+          
+          </>}
         </div>
       </div>
     </>

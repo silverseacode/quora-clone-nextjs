@@ -1,9 +1,10 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, {  useRef, useState } from "react";
 import { CgProfile } from "react-icons/cg";
 import { BsChevronRight } from "react-icons/bs";
 import { TbMessages } from "react-icons/tb";
 import useClickOutside from "@/lib/hooks/useClickOutside";
+import Image from 'next/image'
 
 export default function ProfileMenuItem() {
   const [isOpen, setOpen] = useState(false);
@@ -16,10 +17,7 @@ export default function ProfileMenuItem() {
 
   return (
     <div className="relative">
-      <CgProfile
-        onClick={() => setOpen(true)}
-        className="text-blue-700 text-3xl"
-      />
+      <Image onClick={() => setOpen(true)} className="cursor-pointer rounded-full w-7 h-7" src={'/profile-avatar.webp'} width={100} height={100} alt="profile avatar" />
       {isOpen && (
         <div
           ref={absoluteDivRef}
@@ -28,7 +26,7 @@ export default function ProfileMenuItem() {
           <div className="arrow"></div>
           <div className="w-[215px] border-b">
             <div className="flex flex-col px-4">
-              <CgProfile className="text-blue-700 text-5xl" />
+            <Image onClick={() => setOpen(true)} className="cursor-pointer rounded-full w-10 h-10" src={'/profile-avatar.webp'} width={100} height={100} alt="profile avatar" />
 
               <div className="flex flex-row justify-between items-center py-2">
                 {/* TODO replace with current user */}
