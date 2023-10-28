@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
+import Image from "next/image";
 
 interface IProps {
   setModalOpen: (value: boolean) => void;
@@ -9,17 +10,23 @@ export default function Modal({ setModalOpen }: IProps) {
   const [tabActive, setTabActive] = useState("question");
   const [questionValue, setQuestionValue] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  
+  const [postValue, setPostValue] = useState("")
+  const textareaPostRef = useRef<HTMLTextAreaElement>(null);
 
-  function adjustTextareaHeight(textarea: any) {
+  function adjustTextareaHeight(textarea: HTMLTextAreaElement) {
     textarea.style.height = "auto";
     textarea.style.height = textarea.scrollHeight + "px";
   }
 
   useEffect(() => {
-    if (textareaRef.current) {
+    if (textareaRef.current && tabActive === "question") {
       textareaRef.current.focus();
     }
-  }, []);
+    if (textareaPostRef.current && tabActive === "post") {
+      textareaPostRef.current.focus();
+    }
+  }, [tabActive]);
 
   return (
     <>
@@ -41,8 +48,8 @@ export default function Modal({ setModalOpen }: IProps) {
               className={`pb-1 ${
                 tabActive === "question"
                   ? "border-b-4 border-blue-600"
-                  : "border-b border-gray-400"
-              } w-1/2`}
+                  : "border-b border-gray-400 hover:bg-black hover:bg-opacity-10"
+              } w-1/2 pt-2`}
               onClick={() => setTabActive("question")}
             >
               <span className="font-medium text-sm">Add Question</span>
@@ -51,8 +58,8 @@ export default function Modal({ setModalOpen }: IProps) {
               className={`pb-1 ${
                 tabActive === "post"
                   ? "border-b-4 border-blue-600"
-                  : "border-b border-gray-400"
-              } w-1/2`}
+                  : "border-b border-gray-400 hover:bg-black hover:bg-opacity-10"
+              } w-1/2 pt-2`}
               onClick={() => setTabActive("post")}
             >
               <span className="font-medium text-sm">Create Post</span>
@@ -108,12 +115,31 @@ export default function Modal({ setModalOpen }: IProps) {
             </>
           )}
 
-          {tabActive === "post" && 
-          
-          <>
-          
-          
-          </>}
+          {tabActive === "post" && (
+            <div className="p-4">
+              <div className="flex flex-row items-center">
+                <Image
+                  className="cursor-pointer rounded-full w-10 h-10"
+                  src={"/profile-avatar.webp"}
+                  width={100}
+                  height={100}
+                  alt="profile avatar"
+                />
+                <span className="ml-3 text-xs font-bold">Franco Coronel</span>
+              </div>
+              <textarea
+                  ref={textareaPostRef}
+                  className="mt-5 resize-none break-words w-full overflow-hidden  appearance-none text-black focus:outline-none  h-auto text-lg placeholder-gray-500 font-medium"
+                  value={postValue}
+                  placeholder='Say something...'
+                  onChange={(e) => {
+                    setPostValue(e.target.value);
+                    adjustTextareaHeight(e.target);
+                  }}
+                  rows={1}
+                />
+            </div>
+          )}
         </div>
       </div>
     </>
