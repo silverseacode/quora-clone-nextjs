@@ -9,11 +9,13 @@ import { usePathname } from "next/navigation";
 import { BsSearch } from "react-icons/bs";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import Modal from "./globals/modal";
+import { useModalContext } from "@/context/modal-context";
 
 export default function Header() {
   const pathname = usePathname();
-  const [isOpenSearch, setOpenSearch] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+
+  const { isSearchOpen, setSearchOpen } = useModalContext();
 
 
   const handleChangeSearchTerm = (term: string) => {
@@ -47,22 +49,22 @@ export default function Header() {
         <div className="flex flex-col relative">
           <div
             className={`${
-              isOpenSearch ? "w-[18rem]" : "w-[10rem]"
+              isSearchOpen ? "w-[18rem]" : "w-[10rem]"
             } lg:w-[25rem] flex flex-row border border-gray-100 items-center`}
           >
             <BsSearch className="text-sm mx-2 text-gray-500" />
             <input
               type="text"
               value={searchTerm}
-              onClick={() => setOpenSearch(true)}
+              onClick={() => setSearchOpen(true)}
               onChange={(e) => handleChangeSearchTerm(e.target.value)}
               className={`${
-                isOpenSearch ? "w-[18rem]" : "w-[8rem]"
+                isSearchOpen ? "w-[18rem]" : "w-[8rem]"
               } outline-none py-2 font-light  lg:w-[25rem] text-[0.8rem]`}
               placeholder="Search Quora"
             />
           </div>
-          {isOpenSearch && searchTerm.length > 0 && (
+          {isSearchOpen && searchTerm.length > 0 && (
             <div
               className={`w-[18rem] bg-white h-auto absolute z-20 top-10 rounded-md `}
             >
@@ -82,7 +84,7 @@ export default function Header() {
             </div>
           )}
         </div>
-        {!isOpenSearch && (
+        {!isSearchOpen && (
           <>
             <ProfileMenuItem />
             <div>
@@ -90,14 +92,9 @@ export default function Header() {
             </div>
           </>
         )}
-        <AddQuestionButtonHeader setSearchTerm={setSearchTerm} setOpenSearch={setOpenSearch} />
+        <AddQuestionButtonHeader setSearchTerm={setSearchTerm} />
       </div>
-      {isOpenSearch && (
-        <div
-          onClick={() => setOpenSearch(false)}
-          className="bg-black opacity-75 h-full w-full z-10"
-        ></div>
-      )}
+      
     </>
   );
 }

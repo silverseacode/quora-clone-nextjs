@@ -6,16 +6,14 @@ import { BsChevronDown } from "react-icons/bs";
 import { BsPencil } from "react-icons/bs";
 
 interface IProps {
-  setOpenSearch: (value: boolean) => void;
   setSearchTerm: (value: string) => void;
 }
 
 export default function AddQuestionButtonHeader({
-  setOpenSearch,
   setSearchTerm,
 }: IProps) {
   const [isOpen, setOpen] = useState(false);
-  const { setModalOpen } = useModalContext();
+  const { setModalOpen, setSearchOpen } = useModalContext();
   const absoluteDivRef = useRef<HTMLDivElement | null>(null);
 
   useClickOutside(absoluteDivRef, isOpen, () => {
@@ -27,7 +25,7 @@ export default function AddQuestionButtonHeader({
       <button className="bg-[#b92b27] justify-around h-[2rem] w-[9rem] px-2 text-white flex flex-row items-center rounded-full">
         <div
           onClick={() => {
-            setOpenSearch(false);
+            setSearchOpen(false);
             setSearchTerm("");
             setModalOpen(true);
           }}
@@ -43,7 +41,7 @@ export default function AddQuestionButtonHeader({
       {isOpen && (
         <div
           onClick={() => {
-            setOpenSearch(false);
+            setSearchOpen(false);
             setSearchTerm("");
             setModalOpen(true);
             setOpen(false)
