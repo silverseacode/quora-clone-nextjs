@@ -15,7 +15,6 @@ export default function Header() {
   const [isOpenSearch, setOpenSearch] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const [isModalOpen, setModalOpen] = useState(false);
 
   const handleChangeSearchTerm = (term: string) => {
     setSearchTerm(term);
@@ -23,7 +22,7 @@ export default function Header() {
 
   return (
     <>
-      <div className="flex flex-row bg-white h-[3rem] items-center shadow-md justify-between">
+      <div className="flex flex-row bg-white h-[3rem] items-center  justify-between">
         <div className="mr-5">
           <Image src={"/logo.png"} width={100} height={100} alt="logo quora" />
         </div>
@@ -91,7 +90,7 @@ export default function Header() {
             </div>
           </>
         )}
-        <AddQuestionButtonHeader setModalOpen={setModalOpen} />
+        <AddQuestionButtonHeader setSearchTerm={setSearchTerm} setOpenSearch={setOpenSearch} />
       </div>
       {isOpenSearch && (
         <div
@@ -99,7 +98,6 @@ export default function Header() {
           className="bg-black opacity-75 h-full w-full z-10"
         ></div>
       )}
-      {isModalOpen && <Modal setModalOpen={setModalOpen} />}
     </>
   );
 }

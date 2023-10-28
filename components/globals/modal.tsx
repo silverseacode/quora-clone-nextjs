@@ -2,11 +2,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import Image from "next/image";
+import {IoImagesOutline} from 'react-icons/io5'
+import { useModalContext } from "@/context/modal-context";
 
-interface IProps {
-  setModalOpen: (value: boolean) => void;
-}
-export default function Modal({ setModalOpen }: IProps) {
+export default function Modal() {
+  const {isModalOpen, setModalOpen} = useModalContext()
+
   const [tabActive, setTabActive] = useState("question");
   const [questionValue, setQuestionValue] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -30,9 +31,9 @@ export default function Modal({ setModalOpen }: IProps) {
 
   return (
     <>
-      <div
+      {isModalOpen && <div
         onClick={() => setModalOpen(false)}
-        className="bg-black opacity-75 h-full w-full z-10 flex flex-col items-center justify-center"
+        className="bg-black opacity-75 h-full w-full top-0 absolute z-10 flex flex-col items-center justify-center"
       >
         <div
           onClick={(e) => {
@@ -41,11 +42,11 @@ export default function Modal({ setModalOpen }: IProps) {
           className="bg-white w-[45rem] h-[35rem] rounded-lg relative"
         >
           <div className="p-3">
-            <AiOutlineClose className="text-2xl text-gray-800 " />
+            <AiOutlineClose onClick={() => setModalOpen(false)} className="cursor-pointer text-2xl text-gray-800 " />
           </div>
           <div className="flex flex-row text-center">
             <div
-              className={`pb-1 ${
+              className={`cursor-pointer pb-1 ${
                 tabActive === "question"
                   ? "border-b-4 border-blue-600"
                   : "border-b border-gray-400 hover:bg-black hover:bg-opacity-10"
@@ -55,7 +56,7 @@ export default function Modal({ setModalOpen }: IProps) {
               <span className="font-medium text-sm">Add Question</span>
             </div>
             <div
-              className={`pb-1 ${
+              className={`cursor-pointer pb-1 ${
                 tabActive === "post"
                   ? "border-b-4 border-blue-600"
                   : "border-b border-gray-400 hover:bg-black hover:bg-opacity-10"
@@ -116,6 +117,7 @@ export default function Modal({ setModalOpen }: IProps) {
           )}
 
           {tabActive === "post" && (
+            <>
             <div className="p-4">
               <div className="flex flex-row items-center">
                 <Image
@@ -139,9 +141,19 @@ export default function Modal({ setModalOpen }: IProps) {
                   rows={1}
                 />
             </div>
+            <div className="p-3 absolute   border-t bottom-0 w-full flex flex-row items-center justify-between">
+            <IoImagesOutline className="text-2xl" />
+            <button
+              disabled={questionValue.length === 0}
+              className="disabled:opacity-50 bg-blue-600 text-white py-2 px-4 rounded-full ml-3 text-sm"
+            >
+              Post
+            </button>
+          </div>
+          </>
           )}
         </div>
-      </div>
+      </div>}
     </>
   );
 }

@@ -21,7 +21,7 @@ export default function ProfileMenuItem() {
       {isOpen && (
         <div
           ref={absoluteDivRef}
-          className="absolute bg-white -left-[5.8rem] top-[3.5rem]  pt-4 shadow-md"
+          className="z-20 absolute bg-white -left-[5.8rem] top-[3.5rem]  pt-4 shadow-md"
         >
           <div className="arrow"></div>
           <div className="w-[215px] border-b">
