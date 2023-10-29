@@ -6,9 +6,9 @@ import {IoImagesOutline} from 'react-icons/io5'
 import { useModalContext } from "@/context/modal-context";
 
 export default function Modal() {
-  const {isModalOpen, setModalOpen} = useModalContext()
+  const {isModalOpen, setModalOpen, modalType} = useModalContext()
 
-  const [tabActive, setTabActive] = useState("question");
+  const [tabActive, setTabActive] = useState('question');
   const [questionValue, setQuestionValue] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   
@@ -19,6 +19,10 @@ export default function Modal() {
     textarea.style.height = "auto";
     textarea.style.height = textarea.scrollHeight + "px";
   }
+
+  useEffect(() => {
+    setTabActive(modalType)
+  },[modalType])
 
   useEffect(() => {
     if (textareaRef.current && tabActive === "question") {
@@ -33,7 +37,7 @@ export default function Modal() {
     <>
       {isModalOpen && <div
         onClick={() => setModalOpen(false)}
-        className="bg-black opacity-75 h-full w-full top-0 absolute z-10 flex flex-col items-center justify-center"
+        className="bg-black bg-opacity-75 h-full w-full top-0 absolute z-10 flex flex-col items-center justify-center"
       >
         <div
           onClick={(e) => {

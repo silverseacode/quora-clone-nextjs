@@ -9,7 +9,7 @@ export default function BackdropSearch() {
     {isSearchOpen && (
         <div
           onClick={() => setSearchOpen(false)}
-          className="bg-black opacity-75 h-full w-full z-10"
+          className="bg-black absolute opacity-75 h-full w-full z-10 top-12"
         ></div>
       )}
   </>

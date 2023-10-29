@@ -13,7 +13,7 @@ export default function AddQuestionButtonHeader({
   setSearchTerm,
 }: IProps) {
   const [isOpen, setOpen] = useState(false);
-  const { setModalOpen, setSearchOpen } = useModalContext();
+  const { setModalOpen, setSearchOpen, setModalType } = useModalContext();
   const absoluteDivRef = useRef<HTMLDivElement | null>(null);
 
   useClickOutside(absoluteDivRef, isOpen, () => {
@@ -27,6 +27,7 @@ export default function AddQuestionButtonHeader({
           onClick={() => {
             setSearchOpen(false);
             setSearchTerm("");
+            setModalType("question")
             setModalOpen(true);
           }}
           className="text-xs font-medium"
@@ -43,6 +44,7 @@ export default function AddQuestionButtonHeader({
           onClick={() => {
             setSearchOpen(false);
             setSearchTerm("");
+            setModalType("post")
             setModalOpen(true);
             setOpen(false)
           }}

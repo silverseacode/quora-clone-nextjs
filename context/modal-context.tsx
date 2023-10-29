@@ -8,9 +8,11 @@ type ModalContextProviderProps = {
 
 type ModalContextType = {
   isModalOpen: boolean;
-  isSearchOpen: boolean;
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  modalType: string;
+  setModalType:React.Dispatch<React.SetStateAction<string>>;
   setSearchOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isSearchOpen: boolean;
 
 };
 
@@ -21,6 +23,8 @@ export default function ModalContextProvider({
   children,
 }: ModalContextProviderProps) {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
+  const [modalType, setModalType] = useState('question');
+  
   const [isSearchOpen, setSearchOpen] = useState<boolean>(false);
 
   return (
@@ -28,6 +32,8 @@ export default function ModalContextProvider({
       value={{
         isModalOpen,
         setModalOpen,
+        modalType,
+        setModalType,
         isSearchOpen,
         setSearchOpen
       }}
