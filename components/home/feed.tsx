@@ -37,9 +37,9 @@ export default function Feed() {
       {posts.map((item) => (
         <div
           key={item.id}
-          className="bg-white border p-3 border-gray-300 mb-3 rounded-md"
+          className="bg-white border  border-gray-300 mb-3 rounded-md"
         >
-          <div className="flex flex-row items-center">
+          <div className="flex flex-row items-center pt-3 px-3">
             <Image
               className="h-10 w-10 rounded-full"
               src={item.profilePic}
@@ -52,11 +52,11 @@ export default function Feed() {
               <span className="text-xs text-gray-500">{item.about}</span>
             </div>
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col px-3">
             <p className="font-bold my-2">{item.title}</p>
             <p>{item.description}</p>
           </div>
-          <div className="mt-2 flex flex-row justify-between items-center">
+          <div className="mt-2 px-3 flex flex-row justify-between items-center">
             <div className="space-x-2 text-gray-500 text-sm">
               <span>{item.views}k views</span>
               <span>View {item.upvotes} upvotes</span>
@@ -66,7 +66,7 @@ export default function Feed() {
               <span>1 of {item.answers} answers</span>
             </div>
           </div>
-          <div className="flex flex-row items-center mt-2">
+          <div className=" px-3 flex flex-row items-center mt-2 mb-2">
             <div className="flex flex-row items-center">
               <div className="bg-gray-100 border border-gray-300 flex flex-row  rounded-l-full h-[2rem] w-[7.5rem] items-center space-x-1">
                 <PiArrowFatUpBold className="ml-2 text-blue-500 text-lg" />
@@ -84,6 +84,9 @@ export default function Feed() {
             <FiRefreshCw className="text-lg"/>
             <span className="ml-1 text-sm">{item.shares}</span>
             </div>
+          </div>
+          <div className="bg-gray-100 p-4 flex flex-col justify-center">
+            <span className="text-gray-500 text-sm">66 comments from Sanjay Bhatt and more</span>
           </div>
         </div>
       ))}
