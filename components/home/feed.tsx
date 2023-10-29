@@ -36,17 +36,43 @@ export default function Feed() {
       comments: 66,
       answers: 29,
     },
-    
+    {
+        id: 1,
+        profilePic: "/profile-avatar.webp",
+        fullName: "Hector Quintanilla",
+        about: "Founder at BeBusinessSmart.com (2019-present)",
+        createdAt: new Date(),
+        title: "What comes first in entrepreneurship; the passion or the idea?",
+        description: `I know of many people who have amazing business ideas and never get started
+          Why
+          I know many people who have the dream and passion to do something significant with their life… and they never get started!
+          
+          Why?
+          
+          To answer your question:
+          
+          Its NOT the idea nor the passion that leads you into entrepreneurship! Its the FREEDOM to live your own life that leads you into entrepreneurship!
+          
+          Stop being a people pleaser and stand up for what YOU believe. Thats the ONLY character and accountability that will lead you to entrepreneurship — the courage to live by YOUR terms and NOT following cultural or social guidelines.`,
+        views: 38.6,
+        upvotes: 1.674,
+        shares: 18,
+        comments: 66,
+        answers: 29,
+      },
   ];
 
-  const handleVote = (index: number, type: string) => {
+  const handleVote = (index: number, type: string, hasAction: boolean) => {
     const votes = [...votesOnScreen];
     const votesUniques = votes.filter((item) => item.index !== index);
-    const newVote = {
-      index,
-      type,
-    };
-    votesUniques.push(newVote);
+    if (!hasAction) {
+      const newVote = {
+        index,
+        type,
+      };
+      votesUniques.push(newVote);
+    }
+
     setVotesOnScreen(votesUniques);
   };
 
@@ -90,7 +116,13 @@ export default function Feed() {
             <div className=" px-3 flex flex-row items-center mt-2 mb-2">
               <div className="flex flex-row items-center">
                 <div
-                  onClick={() => handleVote(index, "up")}
+                  onClick={() =>
+                    handleVote(
+                      index,
+                      "up",
+                      vote.length > 0 && vote[0].type === "up"
+                    )
+                  }
                   className="bg-gray-100 border border-gray-300 flex flex-row  rounded-l-full h-[2rem] w-[7.5rem] items-center space-x-1 hover:bg-gray-200 cursor-pointer"
                 >
                   {vote.length > 0 && vote[0].type === "up" ? (
@@ -114,7 +146,13 @@ export default function Feed() {
                   </span>
                 </div>
                 <div
-                  onClick={() => handleVote(index, "down")}
+                  onClick={() =>
+                    handleVote(
+                      index,
+                      "down",
+                      vote.length > 0 && vote[0].type === "down"
+                    )
+                  }
                   className="bg-gray-100 flex flex-row items-center rounded-r-full w-[2.5rem] h-[2rem] border-t border-r border-b border-gray-300 justify-center hover:bg-gray-200 cursor-pointer"
                 >
                   {vote.length > 0 && vote[0].type === "down" ? (
