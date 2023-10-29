@@ -12,7 +12,7 @@ export default function CreatePost() {
   const [inputValue, setInputValue] = useState("");
   const router = useRouter()
   return (
-    <div className="bg-white border mb-5 rounded-lg px-3 pt-3">
+    <div className="bg-white border border-gray-300 mb-3 rounded-md px-3 pt-3">
       <div className="flex flex-row">
         <Image
           className="cursor-pointer rounded-full w-8 h-8"

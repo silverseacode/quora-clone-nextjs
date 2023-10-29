@@ -2,6 +2,7 @@ import Modal from "@/components/globals/modal";
 import Header from "@/components/header";
 import BackdropSearch from "@/components/home/backdropSearch";
 import CreatePost from "@/components/home/createPost";
+import Feed from "@/components/home/feed";
 import SpacesSidebar from "@/components/home/spacesSidebar";
 
 export default function Home() {
@@ -51,7 +52,8 @@ export default function Home() {
           <SpacesSidebar spaces={spaces} />
         </div>
         <div className="col-span-8 p-4">
-          <CreatePost/>
+          <CreatePost />
+          <Feed/>
         </div>
         <div className="col-span-2 p-4">ads</div>
       </div>
